@@ -1,6 +1,6 @@
 var args = arguments[0] || {};
 
-$.module = require('dk.napp.drawer');
+$.module = require('de.marcelpociot.sidemenu');
 
 // convert children to args based on role
 if (args.children) {
@@ -20,51 +20,32 @@ if (args.children) {
 	});
 }
 
-// convert strings to constants
-_.each([
-	'closeDrawerGestureMode',
-	'openDrawerGestureMode',
-	'centerHiddenInteractionMode',
-	'animationMode',
-	'statusBarStyle'
-
-], function(arg) {
-
-	if (args[arg] && typeof args[arg] === 'string') {
-		args[arg] = $.module[args[arg]];
-	}
-});
-
 // delete irrelevant args
 delete args.id;
 delete args.__parentSymbol;
 delete args.children;
 
 // create actual drawer
-$.instance = $.module.createDrawer(args);
+$.instance = $.module.createSideMenu(args);
 
 // add as top level view
 $.addTopLevelView($.instance);
 
 // expose properties, setters and getters
 _.each([
-	'centerWindow',
-	'leftWindow',
-	'rightWindow',
-	'closeDrawerGestureMode',
-	'openDrawerGestureMode',
-	'leftDrawerWidth',
-	'rightDrawerWidth',
-	'orientationModes',
-	'centerHiddenInteractionMode',
-	'animationMode',
-	'animationVelocity',
-	'showShadow',
-	'shadowWidth',
-	'shouldStretchDrawer',
-	'fading',
-	'parallaxAmount',
-	'statusBarStyle'
+	'contentView',
+	'leftMenuView',
+	'rightMenuView',
+	'backgroundImage',
+	'contentViewScaleValue',
+	'scaleContentView',
+	'panGestureEnabled',
+	'panFromEdge',
+	'scaleBackgroundImageView',
+	'parallaxEnabled',
+	'blurBackground',
+	'tintColor',
+	'blurRadius'
 
 ], function(key) {
 	var cc = key[0].toUpperCase() + key.substring(1);
@@ -84,13 +65,9 @@ _.each([
 
 // exporse other functions
 _.each([
-	'toggleLeftWindow',
-	'toggleRightWindow',
-	'bounceLeftWindow',
-	'bounceRightWindow',
-	'isAnyWindowOpen',
-	'isLeftWindowOpen',
-	'isRightWindowOpen',
+	'hideMenuViewController',
+	'presentLeftMenuViewController',
+	'presentRightMenuViewController',
 	'open',
 	'close'
 
@@ -120,28 +97,3 @@ exports.trigger = function(event, args) {
 exports.addEventListener = exports.on;
 exports.removeEventListener = exports.off;
 exports.fireEvent = exports.trigger;
-
-// helpers
-exports.closeLeftWindow = function() {
-	if ($.instance.isLeftWindowOpen()) {
-		return $.instance.toggleLeftWindow();
-	}
-};
-
-exports.closeRightWindow = function() {
-	if ($.instance.isRightWindowOpen()) {
-		return $.instance.toggleRightWindow();
-	}
-};
-
-exports.openLeftWindow = function() {
-	if (!$.instance.isLeftWindowOpen()) {
-		return $.instance.toggleLeftWindow();
-	}
-};
-
-exports.openRightWindow = function() {
-	if (!$.instance.isRightWindowOpen()) {
-		return $.instance.toggleRightWindow();
-	}
-};
