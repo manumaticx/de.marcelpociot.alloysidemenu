@@ -42,10 +42,7 @@ _.each([
 	'panGestureEnabled',
 	'panFromEdge',
 	'scaleBackgroundImageView',
-	'parallaxEnabled',
-	'blurBackground',
-	'tintColor',
-	'blurRadius'
+	'parallaxEnabled'
 
 ], function(key) {
 	var cc = key[0].toUpperCase() + key.substring(1);
