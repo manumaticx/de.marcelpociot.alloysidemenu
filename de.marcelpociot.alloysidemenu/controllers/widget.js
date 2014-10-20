@@ -34,6 +34,7 @@ $.addTopLevelView($.instance);
 // expose properties, setters and getters
 _.each([
 	'contentView',
+	'contentWindow',
 	'leftMenuView',
 	'rightMenuView',
 	'backgroundImage',
