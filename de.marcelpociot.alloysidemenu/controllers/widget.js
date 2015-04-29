@@ -35,6 +35,7 @@ $.addTopLevelView($.instance);
 _.each([
 	'contentView',
 	'contentWindow',
+	'setContentWindow',
 	'leftMenuView',
 	'rightMenuView',
 	'backgroundImage',
